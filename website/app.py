@@ -12,7 +12,7 @@ import pandas as pd
 import random
 import datetime
 from PIL import Image
-
+from streamlit_player import st_player
 
 #intial session state
 if 'admited' not in st.session_state:
