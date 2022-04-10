@@ -131,7 +131,7 @@ if st.session_state['admited'] == 1:
         voting()
     elif st.session_state['repeatvote'] == 1:
         with st.container():
-            st.success('你成功投左'+st.session_state['votesong']+'一票')
+            st.success('你成功投左'+st.session_state['votesong']+'一票，請按下方更新歌曲button')
             left_column, right_column = st.columns(2)
             with left_column:
                 st.write("剛才song1 - "+df.iloc[st.session_state['r1'],4]+"的演唱歌手是"+df.iloc[st.session_state['r1'],3])
