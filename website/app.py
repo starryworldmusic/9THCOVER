@@ -7,7 +7,6 @@ Created on Sun Apr 10 13:08:39 2022
 """
 
 #import library
-showErrorDetails = false
 import streamlit as st
 import pandas as pd
 import random
