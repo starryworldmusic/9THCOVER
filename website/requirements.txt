@@ -1,1 +1,2 @@
-streamlit_player
+streamlit==1.8.1
+streamlit-player==0.1.5
