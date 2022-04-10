@@ -53,7 +53,7 @@ with st.container():
         st.image(img_cover2)
     st.write("感謝大家一起參與「9th Must Go On cover歌錄音大賽」的評審工作，每次你會聽到兩首參賽作品，請投選你認為表現更佳的作品，每天最多可以投票10次。")
     st.write("勝出者可以獲豐富獎品包括：Planet Beyond時尚藍牙耳機(價值：$1580）及獎狀乙張")
-    st.write("投票觀眾亦有機會獲得星格學卷$100，共會抽5名幸運兒 ")
+    st.write("投票觀眾亦有機會獲得星格學卷$100，共會抽5名幸運員 ")
     
 #date process  
 time = datetime.datetime.now()
@@ -106,7 +106,6 @@ def refesh():
     st.session_state['r2'] = random.randint(0,9)
     while st.session_state['r1'] == st.session_state['r2']:
         st.session_state['r1'] = random.randint(0,9)
-    voting()
     
 with st.container():
     with st.form(key="checknumber"):
@@ -134,11 +133,11 @@ if st.session_state['admited'] == 1:
             st.success('你成功投左'+st.session_state['votesong']+'一票，請按下方更新歌曲button')
             left_column, right_column = st.columns(2)
             with left_column:
-                st.write("剛才song1 - "+df.iloc[st.session_state['r1'],4]+"的演唱歌手是"+df.iloc[st.session_state['r1'],3])
+                st.write("剛才song1 - "+df.iloc[st.session_state['r1'],4]+"的演唱歌手是"+df.iloc[st.session_state['r1'],3]+'，以下是他的cover封面設計。')
                 img1 = Image.open("website/images/"+df.iloc[st.session_state['r1'],2])
                 st.image(img1)
             with right_column:
-                st.write("剛才song2 - "+df.iloc[st.session_state['r2'],4]+"的演唱歌手是"+df.iloc[st.session_state['r2'],3])
+                st.write("剛才song2 - "+df.iloc[st.session_state['r2'],4]+"的演唱歌手是"+df.iloc[st.session_state['r2'],3]+'，以下是他的cover封面設計。')
                 img2 = Image.open("website/images/"+df.iloc[st.session_state['r2'],2])
                 st.image(img2)
             st.button(label="更新下一組歌曲",on_click=refesh)
