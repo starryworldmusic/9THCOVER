@@ -1,3 +1,2 @@
-streamlit-player
 streamlit_player
 st_player
