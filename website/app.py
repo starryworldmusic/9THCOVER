@@ -7,6 +7,7 @@ Created on Sun Apr 10 13:08:39 2022
 """
 
 #import library
+pip install streamlit_player
 import streamlit as st
 import pandas as pd
 import random
