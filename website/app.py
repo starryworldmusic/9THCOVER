@@ -162,6 +162,9 @@ def run_query2():
 data = run_query()
 number = run_query2()
 
+st.write(data)
+st.write(data.data)
+
 # Print results.
 for row in data.data:
     st.write(f"{row['name']} has a {row['song_name']}")
