@@ -159,6 +159,8 @@ def run_query():
 def run_query2():
     return supabase.table("number").select("2022-04-11").execute()
 
+supabase.table("number").update({"2022-04-11":10}).eq("number",65774755).excute()
+
 data = run_query()
 number = run_query2()
 
