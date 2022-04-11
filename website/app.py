@@ -25,18 +25,6 @@ def init_connection():
 
 supabase = init_connection()
 
-# Perform query.
-# Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-@st.experimental_memo(ttl=600)
-def run_query():
-    return supabase.table("data").select("*").execute()
-
-rows = run_query()
-
-# Print results.
-for row in rows.data:
-    st.write(f"{row['name']} has a :{row['song_name']}:")
-
 #intial session state
 if 'admited' not in st.session_state:
     st.session_state['admited'] = 0
@@ -165,3 +153,14 @@ if st.session_state['admited'] == 1:
                 st.image(img2)
             st.button(label="更新下一組歌曲",on_click=refesh)
                 
+# Perform query.
+# Uses st.experimental_memo to only rerun when the query changes or after 10 min.
+@st.experimental_memo(ttl=600)
+def run_query():
+    return supabase.table("data").select("*").execute()
+
+rows = run_query()
+
+# Print results.
+for row in rows.data:
+    st.write(f"{row['name']} has a :{row['song_name']}:")
