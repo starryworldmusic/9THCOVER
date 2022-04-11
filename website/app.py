@@ -50,7 +50,7 @@ while st.session_state['r1'] == st.session_state['r2']:
     st.session_state['r1'] = random.randint(0,9)
 
 #top bar
-st.set_page_config(page_title=("9th Must Go On cover歌錄音大賽"),layout="wide")
+
 
 # Header
 with st.container():
