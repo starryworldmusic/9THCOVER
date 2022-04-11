@@ -162,8 +162,6 @@ def run_query2():
 data = run_query()
 number = run_query2()
 
-st.write(str(number.data["2022-04-11"]))
-
 # Print results.
 for row in data.data:
     st.write(f"{row['name']} has a {row['song_name']}")
