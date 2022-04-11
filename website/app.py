@@ -162,7 +162,7 @@ def run_query2():
 data = run_query()
 number = run_query2()
 
-st.write(number[2022-04-11])
+st.write(number["2022-04-11"])
 
 # Print results.
 for row in rows.data:
