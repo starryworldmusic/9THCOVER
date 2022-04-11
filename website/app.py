@@ -157,14 +157,14 @@ if st.session_state['admited'] == 1:
 def run_query():
     return supabase.table("data").select("*").execute()
 def run_query2():
-    return supabase.table("number").select("*").execute()
+    return supabase.table("number").select("2022-04-11").execute()
 
 data = run_query()
 number = run_query2()
 
-st.write(data)
-st.write(data.data)
+st.write(number)
+st.write(number.data)
 
 # Print results.
 for row in data.data:
-    st.write(f"{row['name']} has a {row['song_name']}")
+    st.write(row['name'])
