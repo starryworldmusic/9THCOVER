@@ -154,12 +154,12 @@ if st.session_state['admited'] == 1:
             st.button(label="更新下一組歌曲",on_click=refesh)
                 
 # Perform query.
-# Uses st.experimental_memo to only rerun when the query changes or after 10 min.
-@st.experimental_memo(ttl=600)
 def run_query():
     return supabase.table("data").select("*").execute()
 
 rows = run_query()
+
+st.write(str(rows))
 
 # Print results.
 for row in rows.data:
