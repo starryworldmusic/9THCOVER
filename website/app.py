@@ -16,7 +16,7 @@ from streamlit_player import st_player
 from supabase import create_client, Client
 
 #top bar
-st.set_page_config(page_title=("Cover 比賽"),page_icon=":tada:", layout="wide")
+st.set_page_config(page_title=("Cover 比賽"),page_icon=":microphone:", layout="wide")
 
 # Initialize connection.
 # Uses st.experimental_singleton to only run once.
