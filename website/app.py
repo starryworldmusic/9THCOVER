@@ -85,9 +85,6 @@ def updatevote1():
     st.session_state['nowvote'] += 1
     new1 = int(st.session_state['nowvote'])
     rr1 = int(st.session_state['r1'])
-    total1 = int(df.loc[st.session_state['r1'],"total"])
-    total1 +=1
-    supabase.table("data").update({"total":total1}).eq("id",rr1).execute()
     supabase.table("data").update({"vote":new1}).eq("id",rr1).execute()
     
 def updatevote2():
@@ -97,9 +94,6 @@ def updatevote2():
     st.session_state['nowvote'] += 1
     new2 = int(st.session_state['nowvote'])
     rr2 = int(st.session_state['r2'])
-    total2 = int(df.loc[st.session_state['r2'],"total"])
-    total2 +=1
-    supabase.table("data").update({"total":total2}).eq("id",rr2).execute()
     supabase.table("data").update({"vote":new2}).eq("id",rr2).execute()
     
 def updatecount():
@@ -137,6 +131,14 @@ def voting():
 
 def voted():
     st.session_state['repeatvote'] = 1
+    rr1 = int(st.session_state['r1'])
+    rr2 = int(st.session_state['r2'])
+    total2 = int(df.loc[st.session_state['r2'],"total"])
+    total2 +=1
+    supabase.table("data").update({"total":total2}).eq("id",rr2).execute()
+    total1 = int(df.loc[st.session_state['r1'],"total"])
+    total1 +=1
+    supabase.table("data").update({"total":total1}).eq("id",rr1).execute()
     if st.session_state['vote_radio'] == st.session_state['song1']:
         updatevote1()
         updatecount()
