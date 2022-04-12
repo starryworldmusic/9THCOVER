@@ -54,7 +54,7 @@ while st.session_state['r1'] == st.session_state['r2']:
     st.session_state['r1'] = random.randint(1,10)
 
 #top bar
-
+st.set_page_config(page_title=("Cover 比賽"),page_icon=":tada:", layout="wide")
 
 # Header
 with st.container():
