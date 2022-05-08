@@ -44,9 +44,9 @@ if 'song1' not in st.session_state:
 if 'song2' not in st.session_state:
     st.session_state['song2'] = ""
 if 'r1' not in st.session_state:
-    st.session_state['r1'] = random.randint(1,10)
+    st.session_state['r1'] = random.randint(1,19)
 if 'r2' not in st.session_state:
-    st.session_state['r2'] = random.randint(1,10)
+    st.session_state['r2'] = random.randint(1,19)
 if 'counter' not in st.session_state:
     st.session_state['counter'] = 0
 if 'remain' not in st.session_state:
