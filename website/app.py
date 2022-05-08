@@ -74,7 +74,7 @@ with st.container():
 datasql = supabase.table("data").select("*").execute()
 numbersql = supabase.table("number").select("*").execute()
 df = pd.DataFrame(datasql.data).set_index("id")
-number_df = pd.DataFrame(data = numbersql.data).set_index("number")
+number_df = pd.DataFrame(numbersql.data).set_index("number")
 time = datetime.datetime.now()
 today = str(time.strftime("%Y"+"-"+"%m"+"-"+"%d"))
 
