@@ -162,7 +162,8 @@ with st.container():
 if num_submitted:
     st.session_state['number'] = int(number)
     if st.session_state['number'] in number_df.index:
-        st.session_state['counter'] = int(number_df.loc[st.session_state['number'],today])
+        new_counter = int(number_df.loc[st.session_state['number'],today])
+        st.session_state['counter'] = new_counter
         st.session_state['admited'] = 1
         st.session_state['remain']  = 10 - st.session_state['counter']
         if st.session_state['counter'] >= 10:
