@@ -72,6 +72,7 @@ drawing()
 
 # Header
 with st.container():
+    st.title('星格流行音樂學院')
     st.title('9th Must Go On cover歌錄音大賽')
     left_column, right_column = st.columns(2)
     with left_column:
@@ -119,7 +120,7 @@ def updatecount():
     supabase.table("number").update({today:count1}).eq("number",str(st.session_state['number'])).execute()
     numbersql = supabase.table("number").select("*").execute()
     number_df = pd.DataFrame(data = numbersql.data).set_index("number")
-    new_counter2 = number_df.loc[st.session_state['number'],today]
+    new_counter2 = number_df.loc[str(st.session_state['number']),str(today)]
     new_counter = int(new_counter2)
     st.session_state['counter'] = new_counter
     st.session_state['remain']  = 10 - st.session_state['counter']
