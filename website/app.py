@@ -31,7 +31,7 @@ supabase = init_connection()
 #def function
 def drawing():
     if st.session_state['r1'] <= 19:
-        if st.session_state['r2'] >= 25:
+        if st.session_state['r2'] >= 20:
             st.session_state['r2'] = random.randint(1,19)
             while st.session_state['r1'] == st.session_state['r2']:
                 st.session_state['r2'] = random.randint(1,19)
@@ -41,12 +41,12 @@ def drawing():
             
     else: 
         if st.session_state['r2'] <=19:
-            st.session_state['r2'] = random.randint(25,90)
+            st.session_state['r2'] = random.randint(20,81)
             while st.session_state['r1'] == st.session_state['r2']:
-                st.session_state['r2'] = random.randint(25,90)
+                st.session_state['r2'] = random.randint(20,81)
         else:
             while st.session_state['r1'] == st.session_state['r2']:
-                st.session_state['r2'] = random.randint(25,90)
+                st.session_state['r2'] = random.randint(20,81)
         
 
 #intial session state
@@ -65,9 +65,9 @@ if 'song1' not in st.session_state:
 if 'song2' not in st.session_state:
     st.session_state['song2'] = ""
 if 'r1' not in st.session_state:
-    st.session_state['r1'] = random.randint(1,19)
+    st.session_state['r1'] = random.randint(1,81)
 if 'r2' not in st.session_state:
-    st.session_state['r2'] = random.randint(1,19)
+    st.session_state['r2'] = random.randint(1,81)
 if 'counter' not in st.session_state:
     st.session_state['counter'] = 0
 if 'remain' not in st.session_state:
@@ -172,8 +172,8 @@ def voted():
 
 def refesh():
     st.session_state['repeatvote'] = 0
-    st.session_state['r1'] = random.randint(1,19)
-    st.session_state['r2'] = random.randint(1,19)
+    st.session_state['r1'] = random.randint(1,81)
+    st.session_state['r2'] = random.randint(1,81)
     drawing()
 
 with st.container():
