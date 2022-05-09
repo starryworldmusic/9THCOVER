@@ -30,16 +30,23 @@ supabase = init_connection()
 
 #def function
 def drawing():
-        if st.session_state['r1'] <= 19:
-            if st.session_state['r2'] >= 25:
+    if st.session_state['r1'] <= 19:
+        if st.session_state['r2'] >= 25:
+            st.session_state['r2'] = random.randint(1,19)
+            while st.session_state['r1'] == st.session_state['r2']:
                 st.session_state['r2'] = random.randint(1,19)
-                while st.session_state['r1'] == st.session_state['r2']:
-                    st.session_state['r2'] = random.randint(1,19)
-        else: 
-            if st.session_state['r2'] <=19:
+        else:
+            while st.session_state['r1'] == st.session_state['r2']:
+                st.session_state['r2'] = random.randint(1,19)
+            
+    else: 
+        if st.session_state['r2'] <=19:
+            st.session_state['r2'] = random.randint(25,90)
+            while st.session_state['r1'] == st.session_state['r2']:
                 st.session_state['r2'] = random.randint(25,90)
-                while st.session_state['r1'] == st.session_state['r2']:
-                    st.session_state['r2'] = random.randint(25,90)
+        else:
+            while st.session_state['r1'] == st.session_state['r2']:
+                st.session_state['r2'] = random.randint(25,90)
         
 
 #intial session state
