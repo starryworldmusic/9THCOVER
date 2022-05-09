@@ -28,6 +28,19 @@ def init_connection():
 
 supabase = init_connection()
 
+#def function
+def drawing():
+    st.session_state['r1'] = random.randint(1,19)
+    if st.session_state['r1'] <= 19:
+        st.session_state['r2'] = random.randint(1,19)
+        while st.session_state['r1'] == st.session_state['r2']:
+            st.session_state['r2'] = random.randint(1,19)
+    else: 
+        st.session_state['r2'] = random.randint(25,90)
+        while st.session_state['r1'] == st.session_state['r2']:
+            st.session_state['r2'] = random.randint(25,90)
+        
+
 #intial session state
 if 'admited' not in st.session_state:
     st.session_state['admited'] = 0
@@ -52,9 +65,10 @@ if 'counter' not in st.session_state:
 if 'remain' not in st.session_state:
     st.session_state['remain'] = 10
 if 'number' not in st.session_state:
-    st.session_state['number'] = 88888888
-while st.session_state['r1'] == st.session_state['r2']:
-    st.session_state['r1'] = random.randint(1,10)
+    st.session_state['number'] = '88888888'
+if 'goodplayer' not in st.session_state:
+    st.session_state['goodplayer'] = 0
+drawing()
 
 # Header
 with st.container():
@@ -99,13 +113,14 @@ def updatevote2():
 def updatecount():
     numbersql = supabase.table("number").select("*").execute()
     number_df = pd.DataFrame(data = numbersql.data).set_index("number")
-    st.session_state['newcount'] = number_df.loc[st.session_state['number'],today]
+    st.session_state['newcount'] = number_df.loc[str(st.session_state['number']),today]
     st.session_state['newcount'] += 1
     count1 = int(st.session_state['newcount'])
-    supabase.table("number").update({today:count1}).eq("number",st.session_state['number']).execute()
+    supabase.table("number").update({today:count1}).eq("number",str(st.session_state['number'])).execute()
     numbersql = supabase.table("number").select("*").execute()
     number_df = pd.DataFrame(data = numbersql.data).set_index("number")
-    new_counter = int(number_df.loc[st.session_state['number'],today])
+    new_counter2 = number_df.loc[st.session_state['number'],today]
+    new_counter = int(new_counter2)
     st.session_state['counter'] = new_counter
     st.session_state['remain']  = 10 - st.session_state['counter']
     
@@ -149,18 +164,17 @@ def voted():
 
 def refesh():
     st.session_state['repeatvote'] = 0
-    st.session_state['r1'] = random.randint(1,10)
-    st.session_state['r2'] = random.randint(1,10)
-    while st.session_state['r1'] == st.session_state['r2']:
-        st.session_state['r1'] = random.randint(1,10)
-    
-with st.container():
-    with st.form(key="checknumber"):
-        number = st.text_input("請輸入你的電話號碼")
-        num_submitted = st.form_submit_button("提交")
+    drawing()
+
+if st.session_state['goodplayer'] == 0:
+    with st.container():
+        with st.form(key="checknumber"):
+            number = st.text_input("請輸入你的電話號碼")
+            num_submitted = st.form_submit_button("提交")
         
 if num_submitted:
-    st.session_state['number'] = int(number)
+    st.session_state['goodplayer'] = 1
+    st.session_state['number'] = str(number)
     if st.session_state['number'] in number_df.index:
         new_counter = int(number_df.loc[st.session_state['number'],today])
         st.session_state['counter'] = new_counter
@@ -169,8 +183,11 @@ if num_submitted:
         if st.session_state['counter'] >= 10:
             st.error(str(number)+"的使用者你好，今日你已經完成了所有投票，明天可以繼續。")  
             st.session_state['admited'] = 0
+            st.session_state['goodplayer'] = 0
     else:
         st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
+        st.error("[按此whatsapp 61776662](https://api.whatsapp.com/send/?phone=85261776662)")
+        st.session_state['goodplayer'] = 0
 
      
 if st.session_state['admited'] == 1:
@@ -188,4 +205,4 @@ if st.session_state['admited'] == 1:
                 st.write("剛才song2 - "+df.loc[st.session_state['r2'],"song_name"]+"的演唱歌手是"+df.loc[st.session_state['r2'],"name"]+'，以下是他的cover封面設計。')
                 img2 = Image.open("website/images/"+df.loc[st.session_state['r2'],"photo"])
                 st.image(img2)
-            st.button(label="更新下一組歌曲",on_click=refesh)         
+            st.button(label="更新下一組歌曲",on_click=refesh)  
