@@ -30,15 +30,16 @@ supabase = init_connection()
 
 #def function
 def drawing():
-    st.session_state['r1'] = random.randint(1,19)
-    if st.session_state['r1'] <= 19:
-        st.session_state['r2'] = random.randint(1,19)
-        while st.session_state['r1'] == st.session_state['r2']:
-            st.session_state['r2'] = random.randint(1,19)
-    else: 
-        st.session_state['r2'] = random.randint(25,90)
-        while st.session_state['r1'] == st.session_state['r2']:
-            st.session_state['r2'] = random.randint(25,90)
+        if st.session_state['r1'] <= 19:
+            if st.session_state['r2'] >= 25:
+                st.session_state['r2'] = random.randint(1,19)
+                while st.session_state['r1'] == st.session_state['r2']:
+                    st.session_state['r2'] = random.randint(1,19)
+        else: 
+            if st.session_state['r2'] <=19:
+                st.session_state['r2'] = random.randint(25,90)
+                while st.session_state['r1'] == st.session_state['r2']:
+                    st.session_state['r2'] = random.randint(25,90)
         
 
 #intial session state
@@ -66,8 +67,6 @@ if 'remain' not in st.session_state:
     st.session_state['remain'] = 10
 if 'number' not in st.session_state:
     st.session_state['number'] = '88888888'
-if 'goodplayer' not in st.session_state:
-    st.session_state['goodplayer'] = 0
 drawing()
 
 # Header
@@ -84,6 +83,7 @@ with st.container():
     st.write("感謝大家一起參與「9th Must Go On cover歌錄音大賽」的評審工作，每次你會聽到兩首參賽作品，請投選你認為表現更佳的作品，每天最多可以投票10次。")
     st.write("勝出者可以獲豐富獎品包括：Planet Beyond時尚藍牙耳機(價值：$1580）及獎狀乙張")
     st.write("投票觀眾亦有機會獲得星格學卷$100，共會抽5名幸運兒 ")
+    st.markdown("""---""")
     
 #date process  
 datasql = supabase.table("data").select("*").execute()
@@ -165,16 +165,16 @@ def voted():
 
 def refesh():
     st.session_state['repeatvote'] = 0
+    st.session_state['r1'] = random.randint(1,19)
+    st.session_state['r2'] = random.randint(1,19)
     drawing()
 
-if st.session_state['goodplayer'] == 0:
-    with st.container():
-        with st.form(key="checknumber"):
-            number = st.text_input("請輸入你的電話號碼")
-            num_submitted = st.form_submit_button("提交")
+with st.container():
+    with st.form(key="checknumber"):
+        number = st.text_input("請輸入你的電話號碼")
+        num_submit = st.form_submit_button("提交")
         
-if num_submitted:
-    st.session_state['goodplayer'] = 1
+if num_submit:
     st.session_state['number'] = str(number)
     if st.session_state['number'] in number_df.index:
         new_counter = int(number_df.loc[st.session_state['number'],today])
@@ -184,13 +184,12 @@ if num_submitted:
         if st.session_state['counter'] >= 10:
             st.error(str(number)+"的使用者你好，今日你已經完成了所有投票，明天可以繼續。")  
             st.session_state['admited'] = 0
-            st.session_state['goodplayer'] = 0
     else:
         st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
         st.error("[按此whatsapp 61776662](https://api.whatsapp.com/send/?phone=85261776662)")
-        st.session_state['goodplayer'] = 0
+        st.session_state['goodplayer'] = 1
 
-     
+ 
 if st.session_state['admited'] == 1:
     if st.session_state['repeatvote'] == 0:
         voting()
@@ -206,4 +205,4 @@ if st.session_state['admited'] == 1:
                 st.write("剛才song2 - "+df.loc[st.session_state['r2'],"song_name"]+"的演唱歌手是"+df.loc[st.session_state['r2'],"name"]+'，以下是他的cover封面設計。')
                 img2 = Image.open("website/images/"+df.loc[st.session_state['r2'],"photo"])
                 st.image(img2)
-            st.button(label="更新下一組歌曲",on_click=refesh)  
+            st.button(label="更新下一組歌曲",on_click=refesh)
