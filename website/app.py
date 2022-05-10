@@ -212,4 +212,5 @@ if st.session_state['admited'] == 1:
                 st.write("剛才song2 - 《"+df.loc[st.session_state['r2'],"song_name"]+"》的演唱歌手是「"+df.loc[st.session_state['r2'],"name"]+'」，以下是他的cover封面設計。')
                 img2 = Image.open("website/images/"+df.loc[st.session_state['r2'],"photo"])
                 st.image(img2)
+            st.success('你成功投左'+st.session_state['votesong']+'一票，可以按下方的「更新下一組歌曲」button，為新一組作品投票，若然剛才有你喜歡的歌曲及歌手亦歡迎你到暢所欲言群組分享。')
             st.button(label="更新下一組歌曲",on_click=refesh)
