@@ -140,11 +140,11 @@ def voting():
         st.info(str(st.session_state['number'])+"的使用者你好，今日你已經投了"+ str(st.session_state['counter']) +"次投票，你今天最多可多投"+str(st.session_state['remain'])+"次投票")                 
         left_column, right_column = st.columns(2)
         with left_column:
-            st.header("Song1 - "+df.loc[st.session_state['r1'],"song_name"])
+            st.header("Song1 - 《"+df.loc[st.session_state['r1'],"song_name"]+"》")
             st_player(df.loc[st.session_state['r1'],"song"])
             
         with right_column:
-            st.header("Song2 - "+df.loc[st.session_state['r2'],"song_name"])
+            st.header("Song2 - 《"+df.loc[st.session_state['r2'],"song_name"]+"》")
             st_player(df.loc[st.session_state['r2'],"song"])
         st.session_state['song1'] = str("Song1 - 《"+df.loc[st.session_state['r1'],"song_name"]+"》")
         st.session_state['song2'] = str("Song2 - 《"+df.loc[st.session_state['r2'],"song_name"]+"》")
