@@ -28,6 +28,8 @@ def init_connection():
 
 supabase = init_connection()
 
+st.markdown('<style>div.st-ah{line-height: 4;}</style>', unsafe_allow_html=True)
+
 #def function
 def drawing():
     #如果1號抽中小朋友組
