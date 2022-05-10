@@ -134,7 +134,7 @@ def updatecount():
     
 def voting():
     if st.session_state['counter'] >= 10:
-        st.error(str(st.session_state['number'])+"的使用者你好，今日你已經完成了所有投票，明天可以繼續。") 
+        st.error(str(st.session_state['number'])+"的使用者你好，今日你已經完成了所有投票，明天再繼續投票吧。歡迎你邀請身邊的朋友一齊投票，亦歡迎你係暢所欲言群組分享你喜歡的歌曲及歌手。") 
         st.session_state['admited'] = 0
     elif st.session_state['counter'] <10:
         st.info(str(st.session_state['number'])+"的使用者你好，今日你已經投了"+ str(st.session_state['counter']) +"次投票，你今天最多可多投"+str(st.session_state['remain'])+"次投票")                 
@@ -202,7 +202,7 @@ if st.session_state['admited'] == 1:
         voting()
     elif st.session_state['repeatvote'] == 1:
         with st.container():
-            st.success('你成功投左'+st.session_state['votesong']+'一票，請按下方更新歌曲button，亦歡迎你係暢所欲言群組分享你喜歡的歌曲及歌手。')
+            st.success('你成功投左'+st.session_state['votesong']+'一票，可以按下方的「更新下一組歌曲」button，為新一組作品投票，若然剛才有你喜歡的歌曲及歌手亦歡迎你到暢所欲言群組分享。')
             left_column, right_column = st.columns(2)
             with left_column:
                 st.write("剛才song1 - 《"+df.loc[st.session_state['r1'],"song_name"]+"》的演唱歌手是「"+df.loc[st.session_state['r1'],"name"]+'」，以下是他的cover封面設計。')
