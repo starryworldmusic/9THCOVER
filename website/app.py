@@ -146,8 +146,8 @@ def voting():
         with right_column:
             st.header("Song2 - "+df.loc[st.session_state['r2'],"song_name"])
             st_player(df.loc[st.session_state['r2'],"song"])
-        st.session_state['song1'] = str("Song1 - "+df.loc[st.session_state['r1'],"song_name"])
-        st.session_state['song2'] = str("Song2 - "+df.loc[st.session_state['r2'],"song_name"])
+        st.session_state['song1'] = str("Song1 - 《"+df.loc[st.session_state['r1'],"song_name"]+"》")
+        st.session_state['song2'] = str("Song2 - 《"+df.loc[st.session_state['r2'],"song_name"]+"》")
         song = [st.session_state['song1'],st.session_state['song2']]
         st.session_state['votesong'] = st.radio('請投選你認為表現更佳的作品',song,key='vote_radio')    
         st.button("投票",on_click=voted)
@@ -189,7 +189,7 @@ if num_submit:
         st.session_state['admited'] = 1
         st.session_state['remain']  = 10 - st.session_state['counter']
         if st.session_state['counter'] >= 10:
-            st.error(str(number)+"的使用者你好，今日你已經完成了所有投票，明天可以繼續。")  
+            st.error(str(number)+"的使用者你好，辛苦你了，今日你已經完成了所有投票，明天再繼續投票吧。歡迎你邀請身邊的朋友一齊投票，亦歡迎你係暢所欲言群組分享你喜歡的歌曲及歌手。")  
             st.session_state['admited'] = 0
     else:
         st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
@@ -202,14 +202,14 @@ if st.session_state['admited'] == 1:
         voting()
     elif st.session_state['repeatvote'] == 1:
         with st.container():
-            st.success('你成功投左'+st.session_state['votesong']+'一票，請按下方更新歌曲button')
+            st.success('你成功投左'+st.session_state['votesong']+'一票，請按下方更新歌曲button，亦歡迎你係暢所欲言群組分享你喜歡的歌曲及歌手。')
             left_column, right_column = st.columns(2)
             with left_column:
-                st.write("剛才song1 - "+df.loc[st.session_state['r1'],"song_name"]+"的演唱歌手是"+df.loc[st.session_state['r1'],"name"]+'，以下是他的cover封面設計。')
+                st.write("剛才song1 - 《"+df.loc[st.session_state['r1'],"song_name"]+"》的演唱歌手是「"+df.loc[st.session_state['r1'],"name"]+'」，以下是他的cover封面設計。')
                 img1 = Image.open("website/images/"+df.loc[st.session_state['r1'],"photo"])
                 st.image(img1)
             with right_column:
-                st.write("剛才song2 - "+df.loc[st.session_state['r2'],"song_name"]+"的演唱歌手是"+df.loc[st.session_state['r2'],"name"]+'，以下是他的cover封面設計。')
+                st.write("剛才song2 - 《"+df.loc[st.session_state['r2'],"song_name"]+"》的演唱歌手是「"+df.loc[st.session_state['r2'],"name"]+'」，以下是他的cover封面設計。')
                 img2 = Image.open("website/images/"+df.loc[st.session_state['r2'],"photo"])
                 st.image(img2)
             st.button(label="更新下一組歌曲",on_click=refesh)
