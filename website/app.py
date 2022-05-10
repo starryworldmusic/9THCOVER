@@ -30,7 +30,9 @@ supabase = init_connection()
 
 #def function
 def drawing():
+    #如果1號抽中小朋友組
     if st.session_state['r1'] <= 19:
+        #如果2號唔係小朋友組，就再抽過
         if st.session_state['r2'] >= 20:
             st.session_state['r2'] = random.randint(1,19)
             while st.session_state['r1'] == st.session_state['r2']:
@@ -38,15 +40,16 @@ def drawing():
         else:
             while st.session_state['r1'] == st.session_state['r2']:
                 st.session_state['r2'] = random.randint(1,19)
-            
+    #如果1號抽中公開組        
     else: 
+        #如果2號唔係公開組，就再抽過
         if st.session_state['r2'] <=19:
-            st.session_state['r2'] = random.randint(20,81)
+            st.session_state['r2'] = random.randint(20,82)
             while st.session_state['r1'] == st.session_state['r2']:
-                st.session_state['r2'] = random.randint(20,81)
+                st.session_state['r2'] = random.randint(20,82)
         else:
             while st.session_state['r1'] == st.session_state['r2']:
-                st.session_state['r2'] = random.randint(20,81)
+                st.session_state['r2'] = random.randint(20,82)
         
 
 #intial session state
@@ -65,9 +68,9 @@ if 'song1' not in st.session_state:
 if 'song2' not in st.session_state:
     st.session_state['song2'] = ""
 if 'r1' not in st.session_state:
-    st.session_state['r1'] = random.randint(1,81)
+    st.session_state['r1'] = random.randint(1,82)
 if 'r2' not in st.session_state:
-    st.session_state['r2'] = random.randint(1,81)
+    st.session_state['r2'] = random.randint(1,82)
 if 'counter' not in st.session_state:
     st.session_state['counter'] = 0
 if 'remain' not in st.session_state:
