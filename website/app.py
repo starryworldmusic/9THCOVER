@@ -46,12 +46,12 @@ def drawing():
     else: 
         #如果2號唔係公開組，就再抽過
         if st.session_state['r2'] <=19:
-            st.session_state['r2'] = random.randint(20,82)
+            st.session_state['r2'] = random.randint(20,86)
             while st.session_state['r1'] == st.session_state['r2']:
-                st.session_state['r2'] = random.randint(20,82)
+                st.session_state['r2'] = random.randint(20,86)
         else:
             while st.session_state['r1'] == st.session_state['r2']:
-                st.session_state['r2'] = random.randint(20,82)
+                st.session_state['r2'] = random.randint(20,86)
         
 
 #intial session state
@@ -70,9 +70,9 @@ if 'song1' not in st.session_state:
 if 'song2' not in st.session_state:
     st.session_state['song2'] = ""
 if 'r1' not in st.session_state:
-    st.session_state['r1'] = random.randint(1,82)
+    st.session_state['r1'] = random.randint(1,86)
 if 'r2' not in st.session_state:
-    st.session_state['r2'] = random.randint(1,82)
+    st.session_state['r2'] = random.randint(1,86)
 if 'counter' not in st.session_state:
     st.session_state['counter'] = 0
 if 'remain' not in st.session_state:
