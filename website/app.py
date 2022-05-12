@@ -154,7 +154,8 @@ def voting():
         st.session_state['song1'] = str("Song1 - 《"+df.loc[st.session_state['r1'],"song_name"]+"》")
         st.session_state['song2'] = str("Song2 - 《"+df.loc[st.session_state['r2'],"song_name"]+"》")
         song = [st.session_state['song1'],st.session_state['song2']]
-        st.session_state['votesong'] = st.radio('請投選你認為表現更佳的作品',song,key='vote_radio')    
+        st.session_state['votesong'] = st.radio('請投選你認為表現更佳的作品',song,key='vote_radio')   
+        st.write("當你改了選擇請等候數秒再按投票，否則系統有機會誤判你的選擇")
         st.button("投票",on_click=voted)
 
 
@@ -199,7 +200,6 @@ if num_submit:
     else:
         st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
         st.error("[按此whatsapp 61776662](https://api.whatsapp.com/send/?phone=85261776662)")
-        st.session_state['goodplayer'] = 1
 
  
 if st.session_state['admited'] == 1:
