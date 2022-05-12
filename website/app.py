@@ -55,6 +55,7 @@ def drawing():
         
 
 #intial session state
+random.seed(9001)
 if 'admited' not in st.session_state:
     st.session_state['admited'] = 0
 if 'repeatvote' not in st.session_state:
