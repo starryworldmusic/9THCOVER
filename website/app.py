@@ -203,6 +203,7 @@ if num_submit:
     else:
         st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
         st.error("[按此whatsapp 61776662](https://api.whatsapp.com/send/?phone=85261776662)")
+        st.session_state['admited'] = 0
 
  
 if st.session_state['admited'] == 1:
