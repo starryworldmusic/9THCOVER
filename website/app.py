@@ -52,7 +52,17 @@ def drawing():
         else:
             while st.session_state['r1'] == st.session_state['r2']:
                 st.session_state['r2'] = random.randint(20,86)
-        
+
+#date process  
+datasql = supabase.table("data").select("*").execute()
+numbersql = supabase.table("number").select("*").execute()
+df = pd.DataFrame(datasql.data).set_index("id")
+number_df = pd.DataFrame(numbersql.data).set_index("number")
+time = datetime.datetime.now()
+today = str(time.strftime("%Y"+"-"+"%m"+"-"+"%d"))
+softdf = pd.DataFrame(datasql.data).sort_values(by=['total'])
+newid = softdf['id'].values.tolist()
+newran = newid[:70]
 
 #intial session state
 if 'admited' not in st.session_state:
@@ -70,9 +80,9 @@ if 'song1' not in st.session_state:
 if 'song2' not in st.session_state:
     st.session_state['song2'] = ""
 if 'r1' not in st.session_state:
-    st.session_state['r1'] = random.randint(1,86)
+    st.session_state['r1'] = random.choice(newran)
 if 'r2' not in st.session_state:
-    st.session_state['r2'] = random.randint(1,86)
+    st.session_state['r2'] = random.choice(newran)
 if 'counter' not in st.session_state:
     st.session_state['counter'] = 0
 if 'remain' not in st.session_state:
@@ -97,13 +107,6 @@ with st.container():
     st.write("投票觀眾亦有機會獲得星格學卷$100，共會抽5名幸運兒 ")
     st.markdown("""---""")
     
-#date process  
-datasql = supabase.table("data").select("*").execute()
-numbersql = supabase.table("number").select("*").execute()
-df = pd.DataFrame(datasql.data).set_index("id")
-number_df = pd.DataFrame(numbersql.data).set_index("number")
-time = datetime.datetime.now()
-today = str(time.strftime("%Y"+"-"+"%m"+"-"+"%d"))
 
 def updatevote1():
     datasql = supabase.table("data").select("*").execute()
@@ -178,8 +181,8 @@ def voted():
 
 def refesh():
     st.session_state['repeatvote'] = 0
-    st.session_state['r1'] = random.randint(1,81)
-    st.session_state['r2'] = random.randint(1,81)
+    st.session_state['r1'] = random.choice(newran)
+    st.session_state['r2'] = random.choice(newran)
     drawing()
 
 with st.container():
