@@ -178,6 +178,7 @@ def voted():
     elif st.session_state['vote_radio'] == st.session_state['song2']:
         updatevote2()
         updatecount()
+    supabase.table("pk").insert({"song1":st.session_state['song1'],"song2":st.session_state['song2'],"choose":st.session_state['vote_radio'],"number":st.session_state['number']}).execute()
 
 def refesh():
     st.session_state['repeatvote'] = 0
