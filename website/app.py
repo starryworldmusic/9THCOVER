@@ -192,18 +192,47 @@ with st.container():
         
 if num_submit:
     st.session_state['number'] = str(number)
-    if st.session_state['number'] in number_df.index:
-        new_counter = int(number_df.loc[st.session_state['number'],today])
-        st.session_state['counter'] = new_counter
-        st.session_state['admited'] = 1
-        st.session_state['remain']  = 10 - st.session_state['counter']
-        if st.session_state['counter'] >= 10:
-            st.error(str(number)+"的使用者你好，辛苦你了，今日你已經完成了所有投票，明天再繼續投票吧。歡迎你邀請身邊的朋友一齊投票，亦歡迎你係暢所欲言群組分享你喜歡的歌曲及歌手。")  
+    if st.session_state['number'] = starryadmin:
+        @st.cache
+        def convert_df(df):
+           return df.to_csv().encode('utf-8')
+
+        csv = convert_df(df)
+
+        st.download_button(
+           "Press to Download data",
+           csv,
+           "data.csv",
+           "text/csv",
+           key='download-csv'
+        )
+
+        def convert_df2(number_df):
+           return number_df.to_csv().encode('utf-8')
+
+
+        csv2 = convert_df(number_df)
+
+        st.download_button(
+           "Press to Download number",
+           csv2,
+           "number.csv",
+           "text/csv",
+           key='download-csv'
+        )
+    else:    
+        if st.session_state['number'] in number_df.index:
+            new_counter = int(number_df.loc[st.session_state['number'],today])
+            st.session_state['counter'] = new_counter
+            st.session_state['admited'] = 1
+            st.session_state['remain']  = 10 - st.session_state['counter']
+            if st.session_state['counter'] >= 10:
+                st.error(str(number)+"的使用者你好，辛苦你了，今日你已經完成了所有投票，明天再繼續投票吧。歡迎你邀請身邊的朋友一齊投票，亦歡迎你係暢所欲言群組分享你喜歡的歌曲及歌手。")  
+                st.session_state['admited'] = 0
+        else:
+            st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
+            st.error("[按此whatsapp 61776662](https://api.whatsapp.com/send/?phone=85261776662)")
             st.session_state['admited'] = 0
-    else:
-        st.error("你輸入的電話"+number+"未有登記，如需登記請whatsapp 61776662")
-        st.error("[按此whatsapp 61776662](https://api.whatsapp.com/send/?phone=85261776662)")
-        st.session_state['admited'] = 0
 
  
 if st.session_state['admited'] == 1:
