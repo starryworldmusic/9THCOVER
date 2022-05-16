@@ -192,7 +192,7 @@ with st.container():
         
 if num_submit:
     st.session_state['number'] = str(number)
-    if st.session_state['number'] == starryadmin:
+    if st.session_state['number'] == "starryadmin":
         @st.cache
         def convert_df(df):
            return df.to_csv().encode('utf-8')
