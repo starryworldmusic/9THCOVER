@@ -221,6 +221,21 @@ if num_submit:
            "text/csv",
            key='download-csv'
         )
+        pkdata = supabase.table("dpk").select("*").execute()
+        pkdf = pd.DataFrame(pkdata.data)
+        def convert_df3(pkdf):
+           return df.to_csv().encode('utf-8')
+
+        csv = convert_df(pkdf)
+
+        st.download_button(
+           "Press to Download data",
+           csv,
+           "data.csv",
+           "text/csv",
+           key='download-csv'
+        )
+        
     else:    
         if st.session_state['number'] in number_df.index:
             new_counter = int(number_df.loc[st.session_state['number'],today])
