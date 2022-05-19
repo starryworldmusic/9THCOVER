@@ -221,7 +221,7 @@ if num_submit:
            "text/csv",
            key='download-csv'
         )
-        pkdata = supabase.table("dpk").select("*").execute()
+        pkdata = supabase.table("pk").select("*").execute()
         pkdf = pd.DataFrame(pkdata.data)
         def convert_df3(pkdf):
            return df.to_csv().encode('utf-8')
@@ -229,7 +229,7 @@ if num_submit:
         csv = convert_df(pkdf)
 
         st.download_button(
-           "Press to Download data",
+           "Press to Download pk",
            csv,
            "data.csv",
            "text/csv",
